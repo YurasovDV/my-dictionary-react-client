@@ -7,27 +7,35 @@ import {
 
 import * as types from "../actions/types";
 import DictService from "../services/dict.service";
-import { Query } from "../models/query";
 
-const defaultQuery = new Query();
+const getPageAsync = async (query) => {
+  const res = await DictService.getPage(query);
+  return res;
+};
 
-function* getPage(query = defaultQuery) {
+const addWordAsync = async (word) => {
+  return DictService.create(word);
+};
+
+
+
+function* getPage(action) {
   try {
-    const payload = yield call(() => getData(query));
-    yield put({ type: types.GET_WORDS_SUCCESS, payload });
+    let query = action.payload;
+    const response = yield call(() => getPageAsync(query));
+    yield put({ type: types.GET_WORDS_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: types.GET_WORDS_FAIL, payload: err });
   }
 }
 
-export const getData = async (query) => {
-  const res = await DictService.getPage(query);
-  return res;
-};
-
 function* addWord(action) {
   try {
-    yield put({ type: types.ADD_WORD_SUCCESS, payload: { a: 1 } });
+
+    let word = action.payload;
+    const response = yield call(() => addWordAsync(word));
+
+    yield put({ type: types.ADD_WORD_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: types.ADD_WORD_FAIL, payload: err });
   }

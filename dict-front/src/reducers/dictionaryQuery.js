@@ -12,13 +12,13 @@ export default function dictionaryQueryReducer(state = initialState, action = nu
   switch (type) {
 
     case types.GET_WORDS:
-        return { ...state, isLoading: true, words: payload };
+        return { ...state, isLoading: true};
 
     case types.GET_WORDS_SUCCESS:
-        return { ...state, isLoading: false };
+        return { ...state, isLoading: false, words: payload  };
         
     case types.GET_WORDS_FAIL:
-        return { ...state, isLoading: false, error: action.error };
+        return { ...state, isLoading: false, error: action.payload };
 
 
 

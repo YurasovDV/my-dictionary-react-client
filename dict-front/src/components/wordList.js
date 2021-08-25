@@ -10,10 +10,10 @@ class WordList extends Component
     }
 
     render(){
-        if(this.props.words && this.props.words){
+        if(this.props.words && this.props.words.length){
             let words = this.props.words;
             return (<ul>
-                {words.map(el => (<li key={el.term}>{el.term}&nbsp;{el.translation[0]}</li>))}
+                {words.map(el => (<li key={el.term}>{el.term}&nbsp;{el.translations[0]}</li>))}
             </ul>)
         }
         return (<div>No words found</div >)

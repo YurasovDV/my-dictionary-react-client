@@ -37,7 +37,7 @@ class WordList extends Component {
   render() {
     const words = this.props.words || [];
 
-    var text = this.props.error || 'no error';
+    var text = (this.props && this.props.error) || "no error";
 
     if (words.length === 0) {
       return (
@@ -77,16 +77,20 @@ class WordList extends Component {
           </div>
         </div>
         <div>
-        <button style={{margin: "15px"}}
-          onClick={this.previousPage}
-          className="btn btn-success btn-md "
-        >
-          &lt;
-        </button>
-        <button style={{margin: "15px"}}
-        onClick={this.nextPage} className="btn btn-success btn-md ">
-          &gt;
-        </button>
+          <button
+            style={{ margin: "15px" }}
+            onClick={this.previousPage}
+            className="btn btn-success btn-md "
+          >
+            &lt;
+          </button>
+          <button
+            style={{ margin: "15px" }}
+            onClick={this.nextPage}
+            className="btn btn-success btn-md "
+          >
+            &gt;
+          </button>
         </div>
       </div>
     );
@@ -96,11 +100,11 @@ class WordList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  words: state.words,
-  skip: state.skip,
-  take: state.take,
+  words: state.dictState.words,
+  skip: state.dictState.skip,
+  take: state.dictState.take,
   // temporary
-  error: state.error,
+  error: state.dictState.error,
 });
 
 const mapDispatchToProps = {

@@ -1,8 +1,7 @@
 import * as types from "../actions/types";
-import initialState from "./dictionaryQuery";
 
 export default function repetitionCommandReducer(
-  state = initialState,
+  state = {},
   action = null) {
   const { type, payload } = action;
 
@@ -14,12 +13,11 @@ export default function repetitionCommandReducer(
     case types.CREATE_REPETITION_SET_FAIL:
       return state;
 
+
     case types.COMPLETE_REPETITION:
       return state;
-
     case types.COMPLETE_REPETITION_SUCCESS:
       return state;
-
     case types.COMPLETE_REPETITION_FAIL:
       return state;
 

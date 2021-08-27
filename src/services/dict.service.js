@@ -18,8 +18,6 @@ class DictService {
     .then(getResponseDataOrThrow);
   }
 
-
-
   // { term, topic, translations}
   create(word) {
     return http

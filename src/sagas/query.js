@@ -7,6 +7,7 @@ import {
 
 import * as types from "../actions/types";
 import DictService from "../services/dict.service";
+import { toastr } from 'react-redux-toastr';
 
 const getPageAsync = async (query) => {
   const res = await DictService.getPage(query);
@@ -19,7 +20,9 @@ function* getPage(action) {
     const response = yield call(() => getPageAsync(query));
     yield put({ type: types.GET_WORDS_SUCCESS, payload: response });
   } catch (err) {
-    yield put({ type: types.GET_WORDS_FAIL, payload: err });
+    const msg = typeof err === 'string' ? err : err.message;
+    toastr.error("Could not get words", msg);
+    yield put({ type: types.GET_WORDS_FAIL, payload: msg });
   }
 }
 

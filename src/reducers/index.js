@@ -1,11 +1,10 @@
- //import { combineReducers } from 'redux'
-import reduceReducers from 'reduce-reducers';
-import dictionaryQueryReducer  from './dictionaryQuery';
-import dictionaryCommandReducer  from './dictionaryCommand';
-import repetitionCommandReducer  from './repetitionCommand';
+import { combineReducers } from "redux";
+import dictState from "./dictionaryReducer";
+import repetitionState from "./repetitionCommand";
+import {reducer as toastrReducer} from 'react-redux-toastr'
 
-export default reduceReducers(
-    dictionaryQueryReducer,
-    dictionaryCommandReducer,
-    repetitionCommandReducer
-    );
+export default combineReducers({
+  dictState,
+  repetitionState,
+  toastr: toastrReducer
+});

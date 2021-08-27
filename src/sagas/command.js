@@ -2,6 +2,7 @@ import { put, call, all, takeLatest } from "redux-saga/effects";
 
 import * as types from "../actions/types";
 import DictService from "../services/dict.service";
+import { toastr } from 'react-redux-toastr';
 
 function* addWord(action) {
   try {
@@ -10,7 +11,9 @@ function* addWord(action) {
 
     yield put({ type: types.ADD_WORD_SUCCESS, payload: response });
   } catch (err) {
-    yield put({ type: types.ADD_WORD_FAIL, payload: err });
+    const msg = typeof err === 'string' ? err : err.message;
+    toastr.error("Could not add word", msg);
+    yield put({ type: types.ADD_WORD_FAIL, payload: msg });
   }
 }
 

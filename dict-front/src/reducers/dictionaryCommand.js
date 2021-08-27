@@ -8,21 +8,21 @@ export default function dictionaryCommandReducer(
 
   switch (type) {
     case types.ADD_WORD:
-      return { ...state, isLoading: true, words: [...state.words, payload] };
+      return { ...state, isLoading: true };
     case types.ADD_WORD_SUCCESS:
       return { ...state, isLoading: false, words: [...state.words, payload] };
     case types.ADD_WORD_FAIL:
       return { ...state, isLoading: false, error: payload };
 
     case types.UPDATE_WORD:
-      return { ...state, isLoading: true, words: [...state.words, payload] };
+      return { ...state, isLoading: true };
     case types.UPDATE_WORD_SUCCESS:
       return { ...state, isLoading: false, words: [...state.words, payload] };
     case types.UPDATE_WORD_FAIL:
       return { ...state, isLoading: false, error: payload };
 
     case types.DELETE_WORD:
-      return { ...state, isLoading: true, words: [...state.words, payload] };
+      return { ...state, isLoading: true };
     case types.DELETE_WORD_SUCCESS:
       return { ...state, isLoading: false, words: [...state.words, payload] };
     case types.DELETE_WORD_FAIL:

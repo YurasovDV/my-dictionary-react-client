@@ -4,10 +4,34 @@ import { connect } from "react-redux";
 import { getPage } from "../actions/dict";
 import WordRow from "./wordRow";
 import AddWord from "./addWord";
+import { Query } from "../models/query";
 
 class WordList extends Component {
   componentDidMount() {
     this.props.getPage();
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.previousPage = this.previousPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
+  }
+
+  previousPage() {
+    const { skip, take } = this.props;
+    if (skip >= 20) {
+      this.requestAnotherPage(new Query(skip - 20, take));
+    }
+  }
+
+  nextPage() {
+    const { skip, take } = this.props;
+    this.requestAnotherPage(new Query(skip + 20, take));
+  }
+
+  requestAnotherPage(query) {
+    this.props.getPage(query);
   }
 
   render() {
@@ -49,6 +73,18 @@ class WordList extends Component {
             </table>
           </div>
         </div>
+        <div>
+        <button style={{margin: "15px"}}
+          onClick={this.previousPage}
+          className="btn btn-success btn-md "
+        >
+          &lt;
+        </button>
+        <button style={{margin: "15px"}}
+        onClick={this.nextPage} className="btn btn-success btn-md ">
+          &gt;
+        </button>
+        </div>
       </div>
     );
 
@@ -56,7 +92,11 @@ class WordList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ words: state.words });
+const mapStateToProps = (state) => ({
+  words: state.words,
+  skip: state.skip,
+  take: state.take,
+});
 
 const mapDispatchToProps = {
   getPage,

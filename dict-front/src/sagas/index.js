@@ -1,6 +1,7 @@
 import { all } from "@redux-saga/core/effects";
-import { wordsSaga } from './query'
+import { wordsQuerySaga } from './query'
+import { wordsCommandSaga } from './command'
 
 export default function* rootSaga(){
-    yield all([ wordsSaga() ])
+    yield all([ wordsQuerySaga(), wordsCommandSaga() ])
 }

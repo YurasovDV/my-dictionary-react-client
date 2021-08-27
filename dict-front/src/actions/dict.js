@@ -4,7 +4,7 @@ import { Query } from "../models/query";
 const defaultQuery = new Query();
 
 export function getPage(query = defaultQuery) {
-  return { type: types.GET_WORDS, payload:  query};
+  return { type: types.GET_WORDS, payload: query};
 }
 
 export function addWord(wordDto) {

@@ -1,10 +1,11 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { getPage } from "../actions/dict";
+import { getPage } from "../actions/dictActions";
 import WordRow from "./wordRow";
 import AddWord from "./addWord";
 import { Query } from "../models/query";
+import * as constants from '../services/constants';
 
 class WordList extends Component {
   componentDidMount() {
@@ -41,7 +42,7 @@ class WordList extends Component {
       return (
         <React.Fragment>
           <AddWord />
-          <div className="text-centered warning">No words found</div>
+          <div className="text-centered warning">{constants.EMPTY_DICTIONARY}</div>
         </React.Fragment>
       );
     }
@@ -51,7 +52,7 @@ class WordList extends Component {
         <AddWord />
         <div className="row">
           <div className="col-12 text-centered">
-            <h2>Your dictionary</h2>
+            <h2>{constants.YOUR_DICTIONARY}</h2>
           </div>
         </div>
         <div className="row">
@@ -59,9 +60,9 @@ class WordList extends Component {
             <table className="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th>Term</th>
-                  <th>Translations</th>
-                  <th>Status</th>
+                  <th>{constants.TERM}</th>
+                  <th>{constants.TRANSLATION}</th>
+                  <th>{constants.STATUS}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -100,8 +101,6 @@ const mapStateToProps = (state) => ({
   words: state.dictState.words,
   skip: state.dictState.skip,
   take: state.dictState.take,
-  // temporary
-  error: state.dictState.error,
 });
 
 const mapDispatchToProps = {

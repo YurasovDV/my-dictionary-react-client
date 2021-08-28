@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWord } from "../actions/dict";
+import { addWord } from "../actions/dictActions";
 import { WordDto } from "../models/wordDto";
+import * as constants from '../services/constants';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -27,7 +28,7 @@ class ConnectedForm extends Component {
     event.preventDefault();
     const { term, translation } = this.state;
     // TODO: several translations on client side
-    this.props.addWord(new WordDto(term, "Default", [translation]));
+    this.props.addWord(new WordDto(term, constants.DEFAULT_TOPIC_NAME, [translation]));
     this.setState({ term: "", translation: "" });
   }
 
@@ -39,7 +40,7 @@ class ConnectedForm extends Component {
         <fieldset className="form-group">
           <div className="row justify-content-center">
             <div className="col-4">
-              <label htmlFor="term">Term</label>
+              <label htmlFor="term">{constants.TERM}</label>
               <input
                 type="text"
                 id="term"
@@ -49,7 +50,7 @@ class ConnectedForm extends Component {
               />
             </div>
             <div className="col-4">
-              <label htmlFor="translation">Translation</label>
+              <label htmlFor="translation">{constants.TRANSLATION}</label>
               <input
                 type="text"
                 id="translation"
@@ -64,7 +65,7 @@ class ConnectedForm extends Component {
                   onSubmit={this.handleSubmit}
                   className="btn btn-success btn-md "
                 >
-                  Save
+                  {constants.SAVE}
                 </button>
               </div>
             </div>

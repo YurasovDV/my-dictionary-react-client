@@ -1,8 +1,9 @@
 import React from "react";
 import { Component } from "react";
-import { deleteWord } from "../actions/dict";
+import { deleteWord } from "../actions/dictActions";
 import { statusToString } from "../models/wordDto";
 import { connect } from "react-redux";
+import * as constants from '../services/constants';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -21,9 +22,9 @@ class WordRow extends Component {
         <td className="text-centered">{model.translations.join(", ")}</td>
         <td className="text-centered">{statusToString(model.status)}</td>
         <td className="text-centered">
-          <button className="btn btn-primary m-1">Edit status</button>
+          <button className="btn btn-primary m-1">{constants.RESET_STATUS}</button>
           <button className="btn btn-danger m-1" onClick={this.deleteWord}>
-            Delete
+            {constants.DELETE}
           </button>
         </td>
       </tr>

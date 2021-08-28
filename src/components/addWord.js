@@ -4,11 +4,6 @@ import { addWord } from "../actions/dictActions";
 import { WordDto } from "../models/wordDto";
 import * as constants from '../services/constants';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addWord: (word) => dispatch(addWord(word)),
-  };
-}
 class ConnectedForm extends Component {
   constructor(props) {
     super(props);
@@ -74,6 +69,12 @@ class ConnectedForm extends Component {
       </form>
     );
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addWord: (word) => dispatch(addWord(word)),
+  };
 }
 
 const Form = connect(null, mapDispatchToProps)(ConnectedForm);

@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { WordRepetitionModel } from '../models/wordDto';
 
 export function createRepetitionSet() {
   return { type: types.CREATE_REPETITION_SET, payload: {}};

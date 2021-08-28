@@ -6,3 +6,13 @@ export default axios.create({
         "Content-type" : "application/json"
     }
 });
+
+export const isSuccessful = r => r?.data?.statusCode === 0;
+
+export const getResponseDataOrThrow = r =>  {
+  if (isSuccessful(r)) {
+    return r.data.data;
+  } else {
+    throw new Error(r.data.errorText);
+  }
+};

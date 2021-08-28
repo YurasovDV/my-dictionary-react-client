@@ -1,14 +1,5 @@
 import http from "./http-common";
-
-const isSuccessful = r => r?.data?.statusCode === 0;
-
-const getResponseDataOrThrow = r =>  {
-  if (isSuccessful(r)) {
-    return r.data.data;
-  } else {
-    throw new Error(r.data.errorText);
-  }
-};
+import { getResponseDataOrThrow } from "./http-common";
 
 class DictService {
 

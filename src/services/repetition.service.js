@@ -1,12 +1,15 @@
 import http from "../http-common";
+import { getResponseDataOrThrow } from "./http-common";
 
 class RepetitionService {
-  createRepetitionSet() {
-    return http.post("Repetition/CreateRepetitionSet");
+  async createRepetitionSet() {
+    const r = await http.post("Repetition/CreateRepetitionSet");
+    return getResponseDataOrThrow(r);
   }
 
-  completeRepetition(wordsList) {
-    return http.post("Repetition/CompleteRepetition", wordsList);
+  async completeRepetition(wordsList) {
+    const r = await  http.post("Repetition/CompleteRepetition", wordsList);
+    return getResponseDataOrThrow(r);
   }
 }
 

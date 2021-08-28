@@ -26,6 +26,7 @@ class ConnectedForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { term, translation } = this.state;
+    // TODO: several translations on client side
     this.props.addWord(new WordDto(term, "Default", [translation]));
     this.setState({ term: "", translation: "" });
   }

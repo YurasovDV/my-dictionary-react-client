@@ -47,7 +47,7 @@ export default function dictionaryQueryReducer(
     case types.DELETE_WORD:
       return { ...state, isLoading: true };
     case types.DELETE_WORD_SUCCESS:
-      return { ...state, isLoading: false, words: [...state.words, payload] };
+      return { ...state, isLoading: false };
     case types.DELETE_WORD_FAIL:
       return { ...state, isLoading: false, error: payload };
 

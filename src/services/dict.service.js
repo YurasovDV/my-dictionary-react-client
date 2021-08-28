@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http from "./http-common";
 
 const isSuccessful = r => r?.data?.statusCode === 0;
 
@@ -14,28 +14,28 @@ class DictService {
 
   getPage(query) {
     return http
-    .post("DictionaryRead/GetPageDapper", query)
+    .post("DictionaryRead/GetPageNoTracking", query)
     .then(getResponseDataOrThrow);
   }
 
   // { term, topic, translations}
-  create(word) {
-    return http
-    .post("/DictionaryCommand", word)
-    .then(getResponseDataOrThrow);
+  async create(word) {
+    const r = await http
+      .post("/DictionaryCommand", word);
+    return getResponseDataOrThrow(r);
   }
 
   // { term, topic, translations}
-  update(word) {
-    return http
-    .put("/DictionaryCommand", word)
-    .then(getResponseDataOrThrow);
+  async update(word) {
+    const r = await http
+      .put("/DictionaryCommand", word);
+    return getResponseDataOrThrow(r);
   }
 
-  delete(term) {
-    return http
-    .delete(`/DictionaryCommand/${term}`)
-    .then(getResponseDataOrThrow);
+  async delete(term) {
+    const r = await http
+      .delete(`/DictionaryCommand/${term}`);
+    return getResponseDataOrThrow(r);
   }
 }
 

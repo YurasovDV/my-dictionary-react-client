@@ -37,8 +37,6 @@ class WordList extends Component {
   render() {
     const words = this.props.words || [];
 
-    var text = (this.props && this.props.error) || "no error";
-
     if (words.length === 0) {
       return (
         <React.Fragment>
@@ -54,7 +52,6 @@ class WordList extends Component {
         <div className="row">
           <div className="col-12 text-centered">
             <h2>Your dictionary</h2>
-            <span>{text}</span>
           </div>
         </div>
         <div className="row">

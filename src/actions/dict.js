@@ -1,9 +1,6 @@
 import * as types from "./types";
 
-import { Query } from "../models/query";
-const defaultQuery = new Query();
-
-export function getPage(query = defaultQuery) {
+export function getPage(query) {
   return { type: types.GET_WORDS, payload: query};
 }
 

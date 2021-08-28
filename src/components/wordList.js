@@ -8,7 +8,7 @@ import { Query } from "../models/query";
 
 class WordList extends Component {
   componentDidMount() {
-    this.props.getPage();
+    this.props.getPage(new Query(this.props.skip, this.props.take));
   }
 
   constructor(props) {

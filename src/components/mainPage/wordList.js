@@ -1,11 +1,11 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { getPage } from "../actions/dictActions";
+import { getPage } from "../../actions/dictActions";
 import WordRow from "./wordRow";
 import AddWord from "./addWord";
-import { Query } from "../models/query";
-import * as constants from '../services/constants';
+import { Query } from "../../models/query";
+import * as constants from '../../constants';
 
 class WordList extends Component {
   componentDidMount() {

@@ -7,7 +7,7 @@ export default axios.create({
     }
 });
 
-export const isSuccessful = r => r?.data?.statusCode === 0;
+const isSuccessful = r => r?.data?.statusCode === 0;
 
 export const getResponseDataOrThrow = r =>  {
   if (isSuccessful(r)) {

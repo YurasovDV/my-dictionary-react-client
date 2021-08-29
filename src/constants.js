@@ -17,5 +17,9 @@ export const STATUS = "Status";
 export const DELETE = "Delete";
 export const RESET_STATUS = "Reset status";
 
+export const REPETITION_TIMEOUT = 30000;
+
+
+
 
 

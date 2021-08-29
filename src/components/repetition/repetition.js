@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createRepetitionSet, selectOption, completeRepetition } from '../actions/repetitionActions'
-import * as constants from '../services/constants';
+import { createRepetitionSet, 
+    startRepetition,
+    selectOption, 
+    completeRepetition
+ } from '../../actions/repetitionActions';
+
+import * as constants from '../../constants';
 
 class Repetition extends Component {
 
@@ -9,31 +14,31 @@ class Repetition extends Component {
         this.props.createRepetitionSet();
       }
 
-    start = () => { console.log('train start'); }
+    start = () => { this.props.start() }
 
     render(){
 
-        const words = this.props.words || [];
+        const words = this.props.currentSet || [];
 
         if(words.length === 0){
             return (<div>{constants.EMPTY_DICTIONARY}</div>)
         }
 
-        return (<div>words[0].term</div>)
+        return (<div>{words.map(w => <div><div>{w.term}</div> <div> Correct: {w.translations[0]}, incorrect: {w.option} </div>  </div>)}</div>)
     }
 }
 
 
 const mapStateToProps = (state) => ({
-    words: state.repetitionState.currentSet,
+    currentSet: state.repetitionState.currentSet,
   });
 
 const mapDispatchToProps = {
     createRepetitionSet,
+    startRepetition,
     selectOption,
     completeRepetition
 }
-
 
 const connectedRep = connect(mapStateToProps, mapDispatchToProps)(Repetition);
 

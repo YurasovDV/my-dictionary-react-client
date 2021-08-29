@@ -4,12 +4,14 @@ import {
   all,
   takeLatest,
   race,
+  take,
+  delay
 } from "redux-saga/effects";
 
 import * as types from "../actions/types";
 import RepetitionService from "../services/repetition.service";
 import { notifySuccess, notifyFail } from "./commonEffects";
-import  * as constants from '../services/constants';
+import  * as constants from '../constants';
 
 function* createRepetitionSet() {
   try {
@@ -56,10 +58,11 @@ function* completeRepetition(action) {
   }
 }
 
-export function* wordsCommandSaga() {
+export function* repetitionSaga() {
   yield all([
     takeLatest(types.CREATE_REPETITION_SET, createRepetitionSet),
+    takeLatest(types.START_REPETITION, startRepetition),
     takeLatest(types.COMPLETE_REPETITION, completeRepetition),
-    takeLatest(types.START_REPETITION, startRepetition)
+
   ]);
 }

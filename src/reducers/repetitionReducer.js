@@ -15,13 +15,29 @@ export default function repetitionReducer(
   state = initialState,
   action = null
 ) {
+
   const { type, payload } = action;
 
   switch (type) {
     case types.CREATE_REPETITION_SET:
-      return { ...state, isLoading: true };
+      return { 
+        ...state, 
+        isLoading: true,
+        source: [],
+        currentSet: [],
+        results: [],
+      };
     case types.CREATE_REPETITION_SET_SUCCESS:
-      return { ...state, isLoading: false };
+
+      const preparedSet = prepareSet(payload);
+
+      return { 
+        ...state, 
+        isLoading: true,
+        source: payload,
+        currentSet: preparedSet,
+        results: [],
+      };
     case types.CREATE_REPETITION_SET_FAIL:
       return { ...state, isLoading: false };
 
@@ -41,4 +57,20 @@ export default function repetitionReducer(
     default:
       return state;
   }
+}
+
+// advanced algorithm
+function prepareSet(wordsList){
+  const allMeanings = wordsList.map(w => w.translations).flat();
+
+  let res = [];
+  for(let i = 0; i< wordsList.length; i++ ){
+    let word = wordsList[i];
+    let alternatives = allMeanings.filter(m => word.translations.indexOf(m) === -1);
+    const indexSafe = Math.max(0, Math.floor(Math.random() * alternatives.length));
+    let randomOption = alternatives[indexSafe];
+    res.push({ term: word.term, translations: word.translations, option: randomOption  });
+  }
+
+  return res;
 }

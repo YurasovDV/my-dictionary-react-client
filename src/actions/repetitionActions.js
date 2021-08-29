@@ -5,6 +5,10 @@ export function createRepetitionSet() {
   return { type: types.CREATE_REPETITION_SET, payload: {}};
 }
 
+export function startRepetition(){
+  return { type: types.START_REPETITION, payload: {} }
+}
+
 export function selectOption(word, repetitionStatus){
     return { type : types.SELECT_OPTION, payload: new WordRepetitionModel(word.term, repetitionStatus) }
 }

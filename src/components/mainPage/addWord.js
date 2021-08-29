@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addWord } from "../actions/dictActions";
-import { WordDto } from "../models/wordDto";
-import * as constants from '../services/constants';
+import { addWord } from "../../actions/dictActions";
+import { WordDto } from "../../models/wordDto";
+import * as constants from '../../constants';
 
 class ConnectedForm extends Component {
   constructor(props) {

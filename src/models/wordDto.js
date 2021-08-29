@@ -1,4 +1,4 @@
-import * as constants from '../services/constants';
+import * as constants from '../constants';
 
 const statusesCache = 
 {

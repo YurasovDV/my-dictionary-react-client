@@ -3,20 +3,18 @@ import { getResponseDataOrThrow } from "./http-common";
 
 class DictService {
 
-  getPage(query) {
-    return http
-    .post("DictionaryRead/GetPageNoTracking", query)
-    .then(getResponseDataOrThrow);
+  async getPage(query) {
+    const r = await http
+      .post("DictionaryRead/GetPageNoTracking", query);
+    return getResponseDataOrThrow(r);
   }
 
-  // { term, topic, translations}
   async create(word) {
     const r = await http
       .post("/DictionaryCommand", word);
     return getResponseDataOrThrow(r);
   }
 
-  // { term, topic, translations}
   async update(word) {
     const r = await http
       .put("/DictionaryCommand", word);

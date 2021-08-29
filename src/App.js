@@ -4,8 +4,8 @@ import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import ReduxToastr from 'react-redux-toastr'
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import WordList from "./components/wordList";
-import Repetition from "./components/repetition";
+import WordList from "./components/mainPage/wordList";
+import Repetition from "./components/repetition/repetition";
 class App extends Component {
   render() {
     return (

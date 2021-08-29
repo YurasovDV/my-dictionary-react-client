@@ -1,9 +1,9 @@
 import React from "react";
 import { Component } from "react";
-import { deleteWord } from "../actions/dictActions";
-import { statusToString } from "../models/wordDto";
+import { deleteWord } from "../../actions/dictActions";
+import { statusToString } from "../../models/wordDto";
 import { connect } from "react-redux";
-import * as constants from '../services/constants';
+import * as constants from '../../constants';
 
 function mapDispatchToProps(dispatch) {
   return {

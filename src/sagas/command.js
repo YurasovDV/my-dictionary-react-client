@@ -1,9 +1,9 @@
-import { put, call, all, takeLatest, takeEvery, select } from "redux-saga/effects";
+import { put, call, all, takeEvery } from "redux-saga/effects";
 
 import * as types from "../actions/types";
 import DictService from "../services/dict.service";
-import { toastr } from 'react-redux-toastr';
-import { Query } from "../models/query";
+import { notifySuccess, notifyFail, refreshPage } from './commonEffects';
+
 
 function* addWord(action) {
   try {
@@ -47,46 +47,10 @@ function* updateWord(action){
   }
 }
 
-
-function* refreshPage() {
-  const state = yield select();
-  yield put({ type: types.GET_WORDS, payload: new Query(state.dictState.skip, state.dictState.take) });
-}
-
-function notifySuccess(message, title = "Success"){
-  toastr.success(title, message);
-}
-
-function notifyFail(message, title = "Error"){
-  toastr.error(title, message);
-}
-
-
-function* createRepetitionSet(action) {
-  try {
-    yield put({ type: types.CREATE_REPETITION_SET_SUCCESS, payload: { a: 1 } });
-  } catch (err) {
-    yield put({ type: types.CREATE_REPETITION_SET_FAIL, payload: err });
-  }
-}
-
-function* completeRepetition(action) {
-  try {
-    yield put({ type: types.COMPLETE_REPETITION_SUCCESS, payload: { a: 1 } });
-  } catch (err) {
-    yield put({ type: types.COMPLETE_REPETITION_FAIL, payload: err });
-  }
-}
-
 export function* wordsCommandSaga() {
   yield all([
     takeEvery(types.ADD_WORD, addWord),
     takeEvery(types.DELETE_WORD, deleteWord),
     takeEvery(types.UPDATE_WORD, updateWord),
-
-
-    takeLatest(types.CREATE_REPETITION_SET, createRepetitionSet),
-
-    takeLatest(types.COMPLETE_REPETITION, completeRepetition),
   ]);
 }

@@ -4,7 +4,6 @@ const initialState = {
   // todo maybe separate property for all pages
   words: [],
   isLoading: false,
-  error: null,
   skip: 0,
   take: 20,
 };

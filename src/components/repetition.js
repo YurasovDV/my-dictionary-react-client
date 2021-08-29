@@ -15,17 +15,17 @@ class Repetition extends Component {
 
         const words = this.props.words || [];
 
-        if(words.length == 0){
+        if(words.length === 0){
             return (<div>{constants.EMPTY_DICTIONARY}</div>)
         }
 
-        return (<div></div>)
+        return (<div>words[0].term</div>)
     }
 }
 
 
 const mapStateToProps = (state) => ({
-    words: state.repetitionState.words,
+    words: state.repetitionState.currentSet,
   });
 
 const mapDispatchToProps = {

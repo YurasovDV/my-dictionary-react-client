@@ -42,9 +42,9 @@ class Repetition extends Component {
           >
             <div
               className="col-md-auto rounded-pill bg-primary d-flex justify-content-center"
-              style={{ height: "150px" }}
+              style={{ height: "150px", minWidth: "400px" }}
             >
-              <h1 className="align-self-center" style={{ overflow: "hidden" }}>{w.term}</h1>
+              <h1 className="align-self-center text-light" style={{ overflow: "hidden" }}>{w.term}</h1>
             </div>
           </div>
           <div
@@ -55,13 +55,13 @@ class Repetition extends Component {
               className="col-4 rounded-pill bg-success d-flex justify-content-center"
               style={{ height: "150px" }}
             >
-              <h2 className="align-self-center" style={{overflow: "hidden" }}>{w.translations[0]}</h2>
+              <h2 className="align-self-center text-light" style={{overflow: "hidden" }}>{w.translations[0]}</h2>
             </div>
             <div
               className="col-4 rounded-pill bg-success d-flex justify-content-center"
               style={{ height: "150px" }}
             >
-              <h2 className="align-self-center" style={{ overflow: "hidden" }}>{w.option}</h2>
+              <h2 className="align-self-center text-light" style={{ overflow: "hidden" }}>{w.option}</h2>
             </div>
           </div>
         </div>

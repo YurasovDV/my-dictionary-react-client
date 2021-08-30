@@ -61,7 +61,7 @@ function* completeRepetition(action) {
 export function* repetitionSaga() {
   yield all([
     takeLatest(types.CREATE_REPETITION_SET, createRepetitionSet),
-    takeLatest(types.START_REPETITION, startRepetition),
+    takeLatest(types.START_REPETITION_TIMER, startRepetition),
     takeLatest(types.COMPLETE_REPETITION, completeRepetition),
 
   ]);

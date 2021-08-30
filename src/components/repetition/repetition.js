@@ -2,28 +2,38 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   createRepetitionSet,
-  startRepetition,
+  startRepetitionTimer,
   selectOption,
   completeRepetition,
 } from "../../actions/repetitionActions";
 
 import * as constants from "../../constants";
+import { repetitionStatus } from "../../models/wordDto";
 
-import './repetition.css';
+import "./repetition.css";
 
 class Repetition extends Component {
   componentDidMount() {
     this.props.createRepetitionSet();
   }
 
-  start = () => {
-    this.props.start();
+  click = (optionSelected) => {
+    const currentWord = this.props.currentSet[0];
+    const correct = currentWord.translations[0];
+
+    let status =
+      optionSelected === correct
+        ? repetitionStatus.success
+        : repetitionStatus.failOnce;
+
+    this.props.selectOption(currentWord.term, status);
+    this.props.startRepetitionTimer();
   };
 
   render() {
     const words = this.props.currentSet || [];
 
-    if (this.props.trainEnded) {
+    if (this.props.results.length === constants.REPETITION_SET_LENGTH) {
       return <div>Drill ended, congrats!</div>;
     }
 
@@ -43,12 +53,18 @@ class Repetition extends Component {
             </div>
           </div>
           <div className="row justify-content-around mt-150">
-            <div className="col-4 rounded-pill bg-success d-flex justify-content-center h-150">
+            <div
+              className="col-4 rounded-pill bg-success d-flex justify-content-center h-150"
+              onClick={() => this.click(w.translations[0])}
+            >
               <h2 className="align-self-center text-light overflow-hidden">
                 {w.translations[0]}
               </h2>
             </div>
-            <div className="col-4 rounded-pill bg-success d-flex justify-content-center h-150">
+            <div
+              className="col-4 rounded-pill bg-success d-flex justify-content-center h-150"
+              onClick={() => this.click(w.option)}
+            >
               <h2 className="align-self-center text-light overflow-hidden">
                 {w.option}
               </h2>
@@ -62,11 +78,12 @@ class Repetition extends Component {
 
 const mapStateToProps = (state) => ({
   currentSet: state.repetitionState.currentSet,
+  results: state.repetitionState.results,
 });
 
 const mapDispatchToProps = {
   createRepetitionSet,
-  startRepetition,
+  startRepetitionTimer,
   selectOption,
   completeRepetition,
 };

@@ -49,7 +49,7 @@ export default function repetitionReducer(state = initialState, action = null) {
 
     case types.REPETITION_TIMEOUT:
       const termToRemove = state.currentSet[0];
-      const filtered = state.currentSet.filter((w) => w.term !== termToRemove);
+      const filtered = state.currentSet.filter((w) => w.term !== termToRemove.term);
       return {
         ...state,
         results: [

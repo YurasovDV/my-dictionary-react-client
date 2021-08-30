@@ -17,6 +17,10 @@ class Repetition extends Component {
     this.props.createRepetitionSet();
   }
 
+  componentDidUpdate(){
+    this.props.startRepetitionTimer();
+  }
+
   click = (optionSelected) => {
     const currentWord = this.props.currentSet[0];
     const correct = currentWord.translations[0];

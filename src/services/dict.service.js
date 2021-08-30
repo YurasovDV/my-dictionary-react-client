@@ -6,7 +6,8 @@ class DictService {
   async getPage(query) {
     const r = await http
       .post("DictionaryRead/GetPageNoTracking", query);
-    return getResponseDataOrThrow(r);
+    const page = getResponseDataOrThrow(r);
+    return page;
   }
 
   async create(word) {

@@ -9,16 +9,21 @@ export const DEFAULT_TOPIC_NAME = "Default";
 export const TRANSLATION = "Translation";
 export const TRANSLATIONS = "Translations";
 export const TERM = "Term";
-export const SAVE = "Save";
 
-export const EMPTY_DICTIONARY = "No words found";
-export const YOUR_DICTIONARY = "Your dictionary";
-export const STATUS = "Status";
 export const DELETE = "Delete";
 export const RESET_STATUS = "Reset status";
+export const SAVE = "Save";
+
+export const STATUS = "Status";
+export const EMPTY_DICTIONARY = "No words found";
+export const YOUR_DICTIONARY = "Your dictionary";
+export const TOTAL_WORDS = "Words matching filter"; //"Words in total";
+export const PAGE = "Page ";
+
+
 
 export const REPETITION_TIMEOUT = 30000;
-
+export const ITEMS_ON_PAGE = 20;
 
 
 

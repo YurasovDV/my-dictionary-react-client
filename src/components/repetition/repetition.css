@@ -1,0 +1,19 @@
+.mt-150{
+    margin-top: 150px;
+}
+
+.h-150{
+    height: 150px;
+}
+
+.w-400-h-150-mt-70{
+    height: 150px;
+    min-width: 400px;
+    margin-top: 70px;
+}
+
+.w-100-h-100-minh600{
+    width: 100%;
+    height: 100%;
+    min-height: 600px; 
+}

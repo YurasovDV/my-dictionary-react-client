@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { getPage } from "../../actions/dictActions";
 import { Query } from "../../models/query";
 import * as constants from "../../constants";
 
@@ -33,7 +32,7 @@ class Paging extends Component {
           {constants.TOTAL_WORDS}: {this.props.words.total}
         </div>
         <div>
-          {constants.PAGE} {this.props.skip / constants.ITEMS_ON_PAGE + 1} of{" "}
+          {constants.PAGE} {this.props.skip / constants.ITEMS_ON_PAGE + 1} {" / "}
           {Math.ceil(this.props.words.total / constants.ITEMS_ON_PAGE)}
         </div>
         <button
@@ -63,8 +62,4 @@ const mapStateToProps = (state) => ({
   take: state.dictState.take,
 });
 
-const mapDispatchToProps = {
-  getPage,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Paging);
+export default connect(mapStateToProps, null)(Paging);

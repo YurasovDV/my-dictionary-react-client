@@ -55,7 +55,7 @@ class WordList extends Component {
             </table>
           </div>
         </div>
-        <Paging skip={this.props.skip} take={this.props.take} />
+        <Paging getPage={this.props.getPage}  />
       </div>
     );
 
@@ -65,8 +65,6 @@ class WordList extends Component {
 
 const mapStateToProps = (state) => ({
   words: state.dictState.words,
-  skip: state.dictState.skip,
-  take: state.dictState.take,
 });
 
 const mapDispatchToProps = {

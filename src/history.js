@@ -1,3 +1,4 @@
-import createBrowserHistory from 'history/createBrowserHistory';
-const history = createBrowserHistory();
-export default history;
+// TODO Connected React Router package
+import { createBrowserHistory } from 'history';
+
+export const browserHistory = createBrowserHistory();

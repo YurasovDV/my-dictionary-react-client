@@ -13,7 +13,7 @@ import * as types from "../actions/types";
 import RepetitionService from "../services/repetition.service";
 import { notifySuccess, notifyFail } from "./commonEffects";
 import * as constants from "../constants";
-import history from "../history";
+import { browserHistory } from "../history";
 
 function* createRepetitionSet() {
   try {
@@ -58,7 +58,7 @@ function* completeRepetition(action) {
     yield call(() => RepetitionService.completeRepetition(action.payload));
     yield put({ type: types.COMPLETE_REPETITION_SUCCESS, payload: {} });
     notifySuccess("Succesful repetition");
-    //history.push("/results");
+    browserHistory.push("/results");
   } catch (err) {
     const msg = typeof err === "string" ? err : err.message;
     notifyFail(msg, `Could not complete repetition`);

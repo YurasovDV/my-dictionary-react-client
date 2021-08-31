@@ -1,31 +1,33 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
-import ReduxToastr from 'react-redux-toastr'
+import ReduxToastr from "react-redux-toastr";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Router, Switch, Route, Link } from "react-router-dom";
 import WordList from "./components/mainPage/wordList";
 import Repetition from "./components/repetition/repetition";
 import RepetitionResults from "./components/repetition/repetitionResults";
-
+import { browserHistory } from "./history";
 class App extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <ul className="nav justify-content-start">
-            <li className="nav-item">
-              <Link to={"/dict"} className="nav-link">
-                View dictionary
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/repetition"} className="nav-link">
-                Repeat words
-              </Link>
-            </li>
-          </ul>
+        {/* TODO: proper way to redirect without errors on console */}
+        <Router history={browserHistory}>
           <div className="container-fluid">
+            <ul className="nav justify-content-start">
+              <li className="nav-item">
+                <Link to={"/dict"} className="nav-link">
+                  View dictionary
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/repetition"} className="nav-link">
+                  Repeat words
+                </Link>
+              </li>
+            </ul>
+
             <Switch>
               <Route exact path={["/", "/dict"]} component={WordList} />
               <Route exact path="/repetition" component={Repetition} />

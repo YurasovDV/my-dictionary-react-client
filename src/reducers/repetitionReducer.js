@@ -55,7 +55,7 @@ export default function repetitionReducer(state = initialState, action = null) {
         results: [
           ...state.results,
           new WordRepetitionModel(
-            termToRemove,
+            termToRemove.term,
             repetitionStatus.failedMultipleTimes
           ),
         ],
@@ -68,9 +68,6 @@ export default function repetitionReducer(state = initialState, action = null) {
       return {
         ...state,
         isLoading: false,
-        source: [],
-        currentSet: [],
-        results: [],
       };
     case types.COMPLETE_REPETITION_FAIL:
       return { ...state, isLoading: false };

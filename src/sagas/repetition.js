@@ -42,12 +42,15 @@ function* startRepetition() {
   if (timeout) {
     notifyFail("Better luck next time", "Time is up");
     yield put({ type: types.REPETITION_TIMEOUT });
-  } 
+  }
 
   const state = yield select();
-    if (state.repetitionState.currentSet.length === 0) {
-      yield put({ type: types.COMPLETE_REPETITION });
-    }
+  if (state.repetitionState.currentSet.length === 0) {
+    yield put({
+      type: types.COMPLETE_REPETITION,
+      payload: state.repetitionState.results,
+    });
+  }
 }
 
 function* completeRepetition(action) {
@@ -55,7 +58,7 @@ function* completeRepetition(action) {
     yield call(() => RepetitionService.completeRepetition(action.payload));
     yield put({ type: types.COMPLETE_REPETITION_SUCCESS, payload: {} });
     notifySuccess("Succesful repetition");
-    yield call(() => history.push("/results"));
+    //history.push("/results");
   } catch (err) {
     const msg = typeof err === "string" ? err : err.message;
     notifyFail(msg, `Could not complete repetition`);

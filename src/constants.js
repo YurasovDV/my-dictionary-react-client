@@ -21,8 +21,8 @@ export const TOTAL_WORDS = "Words matching filter"; //"Words in total";
 export const PAGE = "Page ";
 
 
-
-export const REPETITION_TIMEOUT = 10000;
+ 
+export const REPETITION_TIMEOUT = 2000;
 export const REPETITION_SET_LENGTH = 30;
 export const ITEMS_ON_PAGE = 20;
 

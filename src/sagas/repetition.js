@@ -5,13 +5,15 @@ import {
   takeLatest,
   race,
   take,
-  delay
+  delay,
+  select,
 } from "redux-saga/effects";
 
 import * as types from "../actions/types";
 import RepetitionService from "../services/repetition.service";
 import { notifySuccess, notifyFail } from "./commonEffects";
-import  * as constants from '../constants';
+import * as constants from "../constants";
+import history from "../history";
 
 function* createRepetitionSet() {
   try {
@@ -24,33 +26,36 @@ function* createRepetitionSet() {
   }
 }
 
-function* waitForSelectOption(){
-    while(true){
-        const event = yield take(types.SELECT_OPTION);
-        return event;
+function* waitForSelectOption() {
+  while (true) {
+    const event = yield take(types.SELECT_OPTION);
+    return event;
+  }
+}
+
+function* startRepetition() {
+  const { answer, timeout } = yield race({
+    answer: call(waitForSelectOption),
+    timeout: delay(constants.REPETITION_TIMEOUT),
+  });
+
+  if (timeout) {
+    notifyFail("Better luck next time", "Time is up");
+    yield put({ type: types.REPETITION_TIMEOUT });
+  } 
+
+  const state = yield select();
+    if (state.repetitionState.currentSet.length === 0) {
+      yield put({ type: types.COMPLETE_REPETITION });
     }
 }
 
-function* startRepetition(){
-    const { answer, timeout } = yield race({
-        answer: call(waitForSelectOption),
-        timeout: delay(constants.REPETITION_TIMEOUT)
-    });
-
-    if(answer){
-        notifySuccess(`What a speed`);
-    }
-    else{
-        notifyFail(`Time is up`);
-        yield put({ type: types.REPETITION_TIMEOUT } );
-    }
-} 
-
 function* completeRepetition(action) {
   try {
-    let _ = yield call(() => RepetitionService.completeRepetition(action.payload));
+    yield call(() => RepetitionService.completeRepetition(action.payload));
     yield put({ type: types.COMPLETE_REPETITION_SUCCESS, payload: {} });
     notifySuccess("Succesful repetition");
+    yield call(() => history.push("/results"));
   } catch (err) {
     const msg = typeof err === "string" ? err : err.message;
     notifyFail(msg, `Could not complete repetition`);
@@ -63,6 +68,5 @@ export function* repetitionSaga() {
     takeLatest(types.CREATE_REPETITION_SET, createRepetitionSet),
     takeLatest(types.START_REPETITION_TIMER, startRepetition),
     takeLatest(types.COMPLETE_REPETITION, completeRepetition),
-
   ]);
 }

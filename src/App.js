@@ -6,6 +6,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import WordList from "./components/mainPage/wordList";
 import Repetition from "./components/repetition/repetition";
+import RepetitionResults from "./components/repetition/repetitionResults";
+
 class App extends Component {
   render() {
     return (
@@ -27,6 +29,7 @@ class App extends Component {
             <Switch>
               <Route exact path={["/", "/dict"]} component={WordList} />
               <Route exact path="/repetition" component={Repetition} />
+              <Route exact path="/results" component={RepetitionResults} />
             </Switch>
           </div>
         </Router>

@@ -16,7 +16,7 @@ docker-build:
 docker-stop-prev:
   stage: stop-prev
   script:
-    - docker rm -f container_name &>/dev/null || true 
+    - docker rm -f $CI_REGISTRY_IMAGE_MY &>/dev/null || true 
     - docker image prune -a -f
 
 docker-run:

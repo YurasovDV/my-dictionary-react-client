@@ -21,6 +21,7 @@ docker-stop-prev:
 docker-run:
   stage: run
   script:
-    - docker run -p 4250:80 -d $CI_REGISTRY_IMAGE_MY:$CI_COMMIT_SHA --name $CI_REGISTRY_IMAGE_MY
+    - docker run --name $CI_REGISTRY_IMAGE_MY -p 4250:80 -d $CI_REGISTRY_IMAGE_MY:$CI_COMMIT_SHA
   after_script:
-    - docker image prune -a -f
+    - echo "OK"
+    #- docker image prune -a -f

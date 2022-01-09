@@ -22,5 +22,5 @@ docker-run:
   stage: run
   script:
     - docker run --name $CI_REGISTRY_IMAGE_MY -p 4250:80 -d $CI_REGISTRY_IMAGE_MY:$CI_COMMIT_SHA
-  after_script:
-    - docker image prune -a -f
+  # after_script:
+  #   - docker image prune -a -f
